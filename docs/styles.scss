@@ -1,0 +1,24 @@
+
+
+/* Force DataTables to use full width */
+.dataTables_wrapper {
+  width: 100% !important;
+}
+table.dataTable {
+  width: 100% !important;
+}
+
+
+
+/* ---- Wide DT tables ---- */
+.dataTables_wrapper, table.dataTable {
+  width: 100% !important;
+}
+/* Allow table to use full viewport width inside Quarto */
+.main-content, .content, .page-content {
+  max-width: 100% !important;
+}
+/* Keep long cells readable */
+table.dataTable td, table.dataTable th {
+  white-space: nowrap;
+}
