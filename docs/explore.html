@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Data downloads – SwarmGenomics — Pipeline &amp; Data Portal</title>
+<title>Explore – SwarmGenomics — Pipeline &amp; Data Portal</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -68,16 +68,6 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
-<link href="site_libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
-<script src="site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
-<link href="site_libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
-<script src="site_libs/datatables-binding-0.34.0/datatables.js"></script>
-<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-<link href="site_libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
-<link href="site_libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet">
-<script src="site_libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script>
-<link href="site_libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet">
-<script src="site_libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
 <link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
 <script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
 
@@ -107,7 +97,7 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./data.html" aria-current="page"> 
+    <a class="nav-link" href="./data.html"> 
 <span class="menu-text">Data</span></a>
   </li>  
   <li class="nav-item">
@@ -119,7 +109,7 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Teaching Slides</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./explore.html"> 
+    <a class="nav-link active" href="./explore.html" aria-current="page"> 
 <span class="menu-text">Explore</span></a>
   </li>  
 </ul>
@@ -133,7 +123,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Data downloads</li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Explore</li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -152,7 +142,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Data downloads</h1>
+<h1 class="title">Explore</h1>
 </div>
 
 
@@ -169,16 +159,252 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<blockquote class="blockquote">
-<strong>Study data</strong> — The datasets below are from the SwarmGenomics paper and are provided for download and for repeating selected sub‑analyses.
-<p>
-<a class="btn btn-sm btn-outline-secondary" href="data/data_info.txt" download="">Download data_info.txt (column definitions)</a>
-</p>
-</blockquote>
+<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/simple-statistics/7.8.3/simple-statistics.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jstat/1.9.6/jstat.min.js"></script>
+<p>Interactively explore variables from <strong>data/all_info.txt</strong> (tab‑delimited).<br>
+Choose X/Y axes, color (e.g., <strong>Class</strong>), filter by <strong>Class</strong> (including a <strong>(Missing)</strong> option), and optionally highlight a <strong>Species</strong> without filtering. Use log scales and add a regression line (with <em>r</em> and <em>p</em>).</p>
 <div class="cell">
-<div class="cell-output-display">
-<div class="datatables html-widget html-fill-item" id="htmlwidget-441e6338ae60cd88bf3c" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-441e6338ae60cd88bf3c">{"x":{"filter":"none","vertical":false,"data":[["Common parakeet","Snow leopard","Giant panda","Malayan pangolin","Kakapo","Panamanian white-faced capuchin","Anna’s Hummingbird","Little brown bat","Emperor penguin","Polar bear","Asian elephant","Common wombat","Great Tit","Chicken","Blue tit","Zebra finch","Golden eagle","Ostritch","Snowy owl","Platypus","Echidna","Lion","Pacific walrus","Blue whale","Cat","Alpine marmot","Common bottlenose dolphin","Killer whale","European rabbit","West Indian Manatee","Koala","Bald eagle",null,null,"Spoon-billed sandpiper"],["Melopsittacus undulatus","Panthera uncia","Ailuropoda melanoleuca","Manis javanica","Strigops habroptila","Cebus imitator","Calypte anna","Myotis lucifugus","Aptenodytes forsteri","Ursus maritimus","Elephas maximus indicus","Vombatus ursinus","Parus major","Gallus gallus","Cyanistes caeruleus","Taeniopygia guttata","Aquila chrysaetos","Struthio camelus /australis","Bubo scandiacus","Ornithorhynchus anatinus","Tachyglossus aculeatus","Panthera leo","Odobenus rosmarus divergens","Balaenoptera musculus","Felis catus","Marmota marmota","Tursiops truncatus","Orcinus orca","Oryctolagus cuniculus","Trichechus manatus latirostris","Phascolarctos cinereus","Haliaeetus leucocephalus",null,null,"Calidris pygmaea"],["<a href=\"https://tu-dortmund.sciebo.de/s/4gzBWLoYg7aZKMr\" target=\"_blank\" download>https://tu-dortmund.sciebo.de/s/4gzBWLoYg7aZKMr<\/a>","<a href=\"https://tu-dortmund.sciebo.de/s/gQa8YNb4NBR9kZX\" target=\"_blank\" download>https://tu-dortmund.sciebo.de/s/gQa8YNb4NBR9kZX<\/a>","<a href=\"https://tu-dortmund.sciebo.de/s/j7QNxoTB7nAc2ee\" target=\"_blank\" download>https://tu-dortmund.sciebo.de/s/j7QNxoTB7nAc2ee<\/a>","<a href=\"https://tu-dortmund.sciebo.de/s/K3LHWBsBwxEaJGj\" target=\"_blank\" download>https://tu-dortmund.sciebo.de/s/K3LHWBsBwxEaJGj<\/a>","<a href=\"https://tu-dortmund.sciebo.de/s/nTEebea8gNpP3t7\" target=\"_blank\" download>https://tu-dortmund.sciebo.de/s/nTEebea8gNpP3t7<\/a>","<a href=\"https://tu-dortmund.sciebo.de/s/Sj34kB3QmFcQMFT\" target=\"_blank\" download>https://tu-dortmund.sciebo.de/s/Sj34kB3QmFcQMFT<\/a>","<a href=\"https://tu-dortmund.sciebo.de/s/T5HooQeJg4TjS2M\" target=\"_blank\" download>https://tu-dortmund.sciebo.de/s/T5HooQeJg4TjS2M<\/a>","<a href=\"https://tu-dortmund.sciebo.de/s/w8F8pQtcca2kiwQ\" target=\"_blank\" download>https://tu-dortmund.sciebo.de/s/w8F8pQtcca2kiwQ<\/a>","<a href=\"https://tu-dortmund.sciebo.de/s/wZf8eErJkN86n5c\" target=\"_blank\" download>https://tu-dortmund.sciebo.de/s/wZf8eErJkN86n5c<\/a>","<a href=\"https://tu-dortmund.sciebo.de/s/Z7x4Z5JAYEPW3ir\" target=\"_blank\" download>https://tu-dortmund.sciebo.de/s/Z7x4Z5JAYEPW3ir<\/a>","","","","","","","","","","","","","","","","","","","","","","","","",""],["345MB","734MB","725MB","678Mb","322MB","795MB","314Mb","602MB","361Mb","706MB","1.1GB","1.1GB","303Mb","312Mb","332Mb","341Mb","37Mb","403MB","406Mb","546Mb","637Mb","697Mb","704Mb","717Mb","733Mb","734Mb","737MB","772Mb","826MB","863Mb","978Mb","354Mb",null,null,null],["9022ab755b9e7613b81bd6602b4a7054","2d7cece1014adabb8dd932d115a2cd0e","dbcccc02321a06ae7be10a1f082a7203","8d4b52ff451cb530b391d15f6d0f32e8","7341705fdc925476e0b9b248f412dd6a","f788887b7f2f3ede244f1067df12282d","f3ad4b096a7912b9019e1bce01f72b2c","3d6942b92db149dd80e0afe49a1df984","65e6f8c9ad6f690a113b74753f6a1e70","75397d7bfb28cba143cdde9f1f3290bc","ba94b4caf4692afc8d880e23e900aae1","27321a5773854c6f5aa7d7198db217d8","713cb7a694e8d47f65d329591f261b55","51291297e6b693d8d73207509cbba6aa","f5eaf8b0767c9a7cda1082f93c8ae03a","4792f0068344d2828628f470e4633a5b","7532916b4b719ada1868c6183083b41f","5ba18fe11c90950c91f9ce6a1df8558c","4fdd4f91c69ee3a90b2a0e8eb1473aaa","05c792ad2943f2aceff2fb44a7e41c2f","14b8f13b679c3c54195bc083706fb3c9","33cb54c850de6090ff6364f3823606ac","3e677c5f461ba2a1e57578e53ab84413","83a66c6131dd01a76545496349819491","d271b9b06c5270d2d662534df8a4fcd9","a8b7239ce078cf0e7ed27b02ec598e26","8709c98d333d14069f46213021d89889","5addc1c18636b64bd202e4e3ba2e2651","1dc8882ec7bd641f536740a20c0008b7","387c5daa4a7ca38d87bfaa0cd7c5ad1a","98c04afe90e75003b48909ee05b352de","d5d3ce818dd1beb6749dde972b31a51f",null,null,null],["<a href=\"https://tu-dortmund.sciebo.de/s/ocKRk9C7Q927mZc\" target=\"_blank\" download>https://tu-dortmund.sciebo.de/s/ocKRk9C7Q927mZc<\/a>","<a href=\"https://tu-dortmund.sciebo.de/s/KCgJownEGo2c7N7\" target=\"_blank\" download>https://tu-dortmund.sciebo.de/s/KCgJownEGo2c7N7<\/a>","<a href=\"https://tu-dortmund.sciebo.de/s/7BDkFf63Dx6w54r\" target=\"_blank\" download>https://tu-dortmund.sciebo.de/s/7BDkFf63Dx6w54r<\/a>","<a href=\"https://tu-dortmund.sciebo.de/s/9qN3CsCy8pBHKY2\" target=\"_blank\" download>https://tu-dortmund.sciebo.de/s/9qN3CsCy8pBHKY2<\/a>","<a href=\"https://tu-dortmund.sciebo.de/s/dcs2NTMmZsmMRRf\" target=\"_blank\" download>https://tu-dortmund.sciebo.de/s/dcs2NTMmZsmMRRf<\/a>","<a href=\"https://tu-dortmund.sciebo.de/s/AFKRFnz3bTbyNgt\" target=\"_blank\" download>https://tu-dortmund.sciebo.de/s/AFKRFnz3bTbyNgt<\/a>","<a href=\"https://tu-dortmund.sciebo.de/s/jNo7cRNwTa4QgNj\" target=\"_blank\" download>https://tu-dortmund.sciebo.de/s/jNo7cRNwTa4QgNj<\/a>","<a href=\"https://tu-dortmund.sciebo.de/s/3ZmNpQsdfXwmBMp\" target=\"_blank\" download>https://tu-dortmund.sciebo.de/s/3ZmNpQsdfXwmBMp<\/a>","<a href=\"https://tu-dortmund.sciebo.de/s/6NgGs6cMfcg58Fn\" target=\"_blank\" download>https://tu-dortmund.sciebo.de/s/6NgGs6cMfcg58Fn<\/a>","<a href=\"https://tu-dortmund.sciebo.de/s/EC5tssMrA7pQLit\" target=\"_blank\" download>https://tu-dortmund.sciebo.de/s/EC5tssMrA7pQLit<\/a>","","","","","","","","","","","","","","","","","","","","","","","","",""],["8.4GB","65GB","40GB","11Gb","12GB","39GB","24GB","29GB","3.1Gb","54GB","8.2GB","47GB","8.2GB","7Gb","13Gb","28GB","13Gb","15GB","15GB","286MB","17GB","3.6GB","20GB","19GB","19Gb","24Gb","12GB","21GB","2.3GB","30GB","22GB","13GB",null,null,null],["9cc5c7c0b85470066856dceaba563280","b5df66e9d3a3c336e31014eec4572ad2","66a265004d11173fdc2828e9ad5ba5e8","d1df5d02b992403f0de0ea5832152b04","fc6b1ecca558c621bde431e92e2962fd","91440395f1f00c1d51a2f088e8e8641d","330971ef7195c06889c2a2a329ca90e1","ac0025992ea1e3f54cfdb67ee34272ea","8cf3426228e8957d1ca35e59f764eb09","1b2e83bd7c85496e8988c87de10f5db0","0692bf9853139d2d3b002671a327bdbc","ece5ecd393a8f1f0bed3f091d5390d50","16739fa6f76fd537584cc857077c9ed7","9fcc72f0e2f6fc92d35c68ce84d45db7","8311f1442ec03e4d4c513bab3f927437","084933610d22bbb41f396040b4bc6f15","b1e612c668db8774a0b1e3fd6ff0381c","ce811d852aa47ee7fe4c273688ee7e64","12aabea54ce46108e5bb016a057c37b9","98eb7e0b01c20c99109f669a5a503e85","a61bbf20e925c232912eded33f96c194","6bd0005ed43b8459ef5f2992cbf36371","cc857d4e985f73b4981c47fd22c169a0","6e58dd173fe5bfa5e94c6f7e2df9b624","74f55f7bc7a3f2f578470b61641cbef8","dfcd620dc526b02bf14c08be7c2a92c2","c582b10e6b698b490333cc546cb673c4","f3ddc3fce35338bb9f7c744546bd8bb6","9b8e08d38e9fb26301d2771752cfac06","9e482310ca8141cffad9f2907ce5dae6","65351f30c19e8db690c6f8e8599b20b1","dfb8f2dbd8a7d9b04df89b837ec05967",null,null,null],["<a href=\"https://tu-dortmund.sciebo.de/s/gKd26teGkCKr9wP\" target=\"_blank\" download>https://tu-dortmund.sciebo.de/s/gKd26teGkCKr9wP<\/a>","<a href=\"https://tu-dortmund.sciebo.de/s/ajFkXGfHJLtdkRR\" target=\"_blank\" download>https://tu-dortmund.sciebo.de/s/ajFkXGfHJLtdkRR<\/a>","<a href=\"https://tu-dortmund.sciebo.de/s/2DZpdELXA8q2nbk\" target=\"_blank\" download>https://tu-dortmund.sciebo.de/s/2DZpdELXA8q2nbk<\/a>","<a href=\"https://tu-dortmund.sciebo.de/s/HSie8DwrPATeWeL\" target=\"_blank\" download>https://tu-dortmund.sciebo.de/s/HSie8DwrPATeWeL<\/a>","<a href=\"https://tu-dortmund.sciebo.de/s/w3K6oiYYFEQDCiy\" target=\"_blank\" download>https://tu-dortmund.sciebo.de/s/w3K6oiYYFEQDCiy<\/a>","<a href=\"https://tu-dortmund.sciebo.de/s/94PXow8x5CsFpjz\" target=\"_blank\" download>https://tu-dortmund.sciebo.de/s/94PXow8x5CsFpjz<\/a>","<a href=\"https://tu-dortmund.sciebo.de/s/yA4cTsDF9rNgEBp\" target=\"_blank\" download>https://tu-dortmund.sciebo.de/s/yA4cTsDF9rNgEBp<\/a>","<a href=\"https://tu-dortmund.sciebo.de/s/Nc9R6a7G8Bn2FWz\" target=\"_blank\" download>https://tu-dortmund.sciebo.de/s/Nc9R6a7G8Bn2FWz<\/a>","<a href=\"https://tu-dortmund.sciebo.de/s/aAXMdgkLziTbj5H\" target=\"_blank\" download>https://tu-dortmund.sciebo.de/s/aAXMdgkLziTbj5H<\/a>","<a href=\"https://tu-dortmund.sciebo.de/s/asQE7zLHKGr9N97\" target=\"_blank\" download>https://tu-dortmund.sciebo.de/s/asQE7zLHKGr9N97<\/a>","","","","","","","","","","","","","","","","","","","","","","","","",""],["4.4GB","932MB","17GB","8.8Gb","4.9GB","12GB","6.5GB","12GB","4.2Gb","12GB","5.7Gb","15GB","5GB","5GB","4.6Gb","8.1GB","6.2GB","5.4GB","6GB","238Mb","4.3GB","2.6GB","6.7GB","8.8GB","9.6GB","4.4GB","7.7GB","7.3GB","4.4GB","7.7GB","13GB","4.5GB",null,null,null],["97ab26e9b92f7ea78d2d1db3cb1d18dd","02b6ee9acd3787906406e52d08930e20","4a714b8cc63c4f507f01381bb2d2f64c","b5a1649a54f239bb1f7fad4073059244","47ba62f9b116010598f51404c3ecc0ee","66d46d93bd18edc0bfea7d6d328e9ada","2aeb7f24c86572d5dcec8bba49a31b31","146913583f2b4c52617c7db34517b9f6","9956bb60b583e19381df9b39e4ea95ac","90d945fd710158f7c53d306c33031f0a","45c0a1cb4a75b6e6d068d70c93869087","791888fd659514ee1dda8286203b8b43","ff717f10ff657c770417dfb0c4a4a131","05f453f3adc1d51dd97c57f059faefb8","d63ecdd31e52ddd63b930cb5e3d89fc5","eec749f33638f310e544f8698b656903","2171731929fe3615ec5e6d363f76a5a7","4d6bda04169ba87e928ee10c0bdc5489","e73aba545293590e7b10a284faaa0cce","f3f8110c62377317c1e44eb311646e22","cb600652292921ee8de5f3329cf37a90","c552e6c92b7c729530ebf3b276403e1f","8cc69baf07160a5e97f5ba324bae5839","b7bd26c49442d9f341118ec5929c23c1","07c02bef40227dc2691dc269ee374d12","c9c2dde85ec24d1a851a76b8b5757de9","9d5a8dec4450f2c73db24cb0e2ba7a5b","1e01c5d50af9d327aa392929e89b37be","041f6aded3606a8d0916910c6fc4c08f","221470daaa8599f42471702ae002c2d8","5341b98ebeb23bddd4e2ffb4a16703d3","c8f00201743d49f0c290f7d8674ccf45",null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,"no bam found"]],"container":"<table class=\"display nowrap\">\n  <thead>\n    <tr>\n      <th>Species<\/th>\n      <th>Scientific.name<\/th>\n      <th>Ref..Genome.link<\/th>\n      <th>Ref..genome..file.size<\/th>\n      <th>MD5.Hash...5<\/th>\n      <th>BAM.file.link<\/th>\n      <th>BAM.file.size<\/th>\n      <th>MD5.Hash...8<\/th>\n      <th>VCF.file.link<\/th>\n      <th>VCF.file.size<\/th>\n      <th>MD5.Hash...11<\/th>\n      <th>Notes<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"autoWidth":true,"scrollX":true,"columnDefs":[{"name":"Species","targets":0},{"name":"Scientific.name","targets":1},{"name":"Ref..Genome.link","targets":2},{"name":"Ref..genome..file.size","targets":3},{"name":"MD5.Hash...5","targets":4},{"name":"BAM.file.link","targets":5},{"name":"BAM.file.size","targets":6},{"name":"MD5.Hash...8","targets":7},{"name":"VCF.file.link","targets":8},{"name":"VCF.file.size","targets":9},{"name":"MD5.Hash...11","targets":10},{"name":"Notes","targets":11}],"order":[],"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="cell-output-display no-overflow-x">
+<p>
+<em>Using data from: data/all_info.txt</em>
+</p>
+<div class="mb-2">
+<label>X-axis:</label>
+<select id="xvar" class="form-select d-inline-block w-auto">
+<option value="avg. heterozygosity">avg. heterozygosity</option>
+<option value="bodysize">bodysize</option>
+<option value="Repeats">Repeats</option>
+<option value="NUMTs">NUMTs</option>
+<option value="Genome Length">Genome Length</option>
+<option value="Num ROHs">Num ROHs</option>
+<option value="Total ROH Length">Total ROH Length</option>
+</select>
+<span class="ms-3"></span>
+<label>Y-axis:</label>
+<select id="yvar" class="form-select d-inline-block w-auto">
+<option value="avg. heterozygosity">avg. heterozygosity</option>
+<option value="bodysize">bodysize</option>
+<option value="Repeats">Repeats</option>
+<option value="NUMTs">NUMTs</option>
+<option value="Genome Length">Genome Length</option>
+<option value="Num ROHs">Num ROHs</option>
+<option value="Total ROH Length">Total ROH Length</option>
+</select>
+<span class="ms-3"></span>
+<label>Color:</label>
+<select id="cvar" class="form-select d-inline-block w-auto">
+<option value="Species">Species</option>
+<option value="avg. heterozygosity">avg. heterozygosity</option>
+<option value="bodysize">bodysize</option>
+<option value="Repeats">Repeats</option>
+<option value="NUMTs">NUMTs</option>
+<option value="Genome Length">Genome Length</option>
+<option value="Num ROHs">Num ROHs</option>
+<option value="Total ROH Length">Total ROH Length</option>
+<option value="Class">Class</option>
+</select>
+</div>
+<div class="mb-2">
+<label>Class filter:</label>
+<select id="classFilter" class="form-select d-inline-block w-auto">
+<option value="__ALL__">All</option>
+<option value="mammal">mammal</option>
+<option value="bird">bird</option>
+</select>
+<span class="ms-3"></span>
+<label>Highlight species:</label>
+<select id="speciesHi" class="form-select d-inline-block w-auto">
+<option value="__NONE__">None</option>
+<option value="Alpine marmot">Alpine marmot</option>
+<option value="Asian elephant">Asian elephant</option>
+<option value="Blue tit">Blue tit</option>
+<option value="Blue whale">Blue whale</option>
+<option value="Bottlenose dolphin">Bottlenose dolphin</option>
+<option value="Chicken">Chicken</option>
+<option value="Common parakeet">Common parakeet</option>
+<option value="Common wombat">Common wombat</option>
+<option value="Echidna">Echidna</option>
+<option value="Emperor penguin">Emperor penguin</option>
+<option value="European rabbit">European rabbit</option>
+<option value="Giant panda high">Giant panda high</option>
+<option value="Giant panda low">Giant panda low</option>
+<option value="Golden eagle">Golden eagle</option>
+<option value="Great tit">Great tit</option>
+<option value="Lion">Lion</option>
+<option value="Platypus">Platypus</option>
+<option value="Snowy owl">Snowy owl</option>
+<option value="Southern ostritch">Southern ostritch</option>
+<option value="Spoon-billed sandpiper">Spoon-billed sandpiper</option>
+<option value="Sunda pangolin">Sunda pangolin</option>
+</select>
+</div>
+<div class="mb-2">
+<div class="form-check">
+<input type="checkbox" class="form-check-input" id="logx">
+<label class="form-check-label" for="logx">log X</label>
+</div>
+<div class="form-check">
+<input type="checkbox" class="form-check-input" id="logy">
+<label class="form-check-label" for="logy">log Y</label>
+</div>
+<div class="form-check">
+<input type="checkbox" class="form-check-input" id="showfit">
+<label class="form-check-label" for="showfit">regression line (show r, p)</label>
+</div>
+</div>
+<div id="explore-plot"></div>
+<div id="stats-panel" class="mt-2 small text-muted"></div>
+<script>window.SWARM_DF = [{"Species":"Alpine marmot","avg. heterozygosity":0.000255268,"bodysize":5,"Repeats":29.739999999999998,"NUMTs":69,"Genome Length":2257269818,"Num ROHs":1448,"Total ROH Length":144536590,"Class":"mammal"},{"Species":"Asian elephant","avg. heterozygosity":0.000686919,"bodysize":3100,"Repeats":51.200000000000003,"NUMTs":108,"Genome Length":3369292286,"Num ROHs":3330,"Total ROH Length":141138534,"Class":"mammal"},{"Species":"Blue tit","avg. heterozygosity":0.00384677,"bodysize":0.011,"Repeats":8.52,"NUMTs":11,"Genome Length":973796202,"Num ROHs":335,"Total ROH Length":3096013,"Class":"bird"},{"Species":"Blue whale","avg. heterozygosity":0.00214007,"bodysize":160000,"Repeats":36.719999999999999,"NUMTs":208,"Genome Length":2368426609,"Num ROHs":9414,"Total ROH Length":239584750,"Class":"mammal"},{"Species":"Bottlenose dolphin","avg. heterozygosity":0.00101715,"bodysize":280,"Repeats":null,"NUMTs":null,"Genome Length":2342900125,"Num ROHs":null,"Total ROH Length":null,"Class":"mammal"},{"Species":"Chicken","avg. heterozygosity":0.00408792,"bodysize":7,"Repeats":13.619999999999999,"NUMTs":10,"Genome Length":1017373226,"Num ROHs":4062,"Total ROH Length":195495680,"Class":"bird"},{"Species":"Common parakeet","avg. heterozygosity":0.00324826,"bodysize":0.028,"Repeats":13.58,"NUMTs":11,"Genome Length":1085400037,"Num ROHs":64,"Total ROH Length":2015289,"Class":"bird"},{"Species":"Common wombat","avg. heterozygosity":0.00182322,"bodysize":21,"Repeats":null,"NUMTs":null,"Genome Length":3066323319,"Num ROHs":3457,"Total ROH Length":1086321185,"Class":"mammal"},{"Species":"Echidna","avg. heterozygosity":0.00393201,"bodysize":2,"Repeats":null,"NUMTs":null,"Genome Length":2102147521,"Num ROHs":95,"Total ROH Length":1601630,"Class":"mammal"},{"Species":"Emperor penguin","avg. heterozygosity":0.00137942,"bodysize":31.5,"Repeats":6,"NUMTs":24,"Genome Length":629093285,"Num ROHs":591,"Total ROH Length":20530956,"Class":"bird"},{"Species":"European rabbit","avg. heterozygosity":0.00139674,"bodysize":1.6,"Repeats":43.039999999999999,"NUMTs":76,"Genome Length":2751015428,"Num ROHs":3806,"Total ROH Length":198181167,"Class":"mammal"},{"Species":"Giant panda high","avg. heterozygosity":0.00139539,"bodysize":100,"Repeats":30.670000000000002,"NUMTs":50,"Genome Length":2294400319,"Num ROHs":10,"Total ROH Length":1673041,"Class":"mammal"},{"Species":"Giant panda low","avg. heterozygosity":0.000808525,"bodysize":100,"Repeats":30.670000000000002,"NUMTs":50,"Genome Length":2294400319,"Num ROHs":4846,"Total ROH Length":369839430,"Class":"mammal"},{"Species":"Golden eagle","avg. heterozygosity":0.00151678,"bodysize":5,"Repeats":8.9,"NUMTs":12,"Genome Length":1215614160,"Num ROHs":1962,"Total ROH Length":647833177,"Class":"bird"},{"Species":"Great tit","avg. heterozygosity":0.00533019,"bodysize":0.018,"Repeats":7.02,"NUMTs":6,"Genome Length":987035201,"Num ROHs":1946,"Total ROH Length":47617542,"Class":"bird"},{"Species":"Lion","avg. heterozygosity":9.96e-05,"bodysize":150,"Repeats":32.890000000000001,"NUMTs":62,"Genome Length":2288568809,"Num ROHs":829,"Total ROH Length":1857191967,"Class":"mammal"},{"Species":"Platypus","avg. heterozygosity":0.00015583,"bodysize":2,"Repeats":51.600000000000001,"NUMTs":47,"Genome Length":1813343107,"Num ROHs":857,"Total ROH Length":1496387362,"Class":"mammal"},{"Species":"Snowy owl","avg. heterozygosity":0.000546948,"bodysize":2,"Repeats":10.34,"NUMTs":25,"Genome Length":999613802,"Num ROHs":350,"Total ROH Length":502605680,"Class":"bird"},{"Species":"Southern ostritch","avg. heterozygosity":0.00182769,"bodysize":110,"Repeats":5.19,"NUMTs":10,"Genome Length":445311711,"Num ROHs":9,"Total ROH Length":1615040,"Class":"bird"},{"Species":"Spoon-billed sandpiper","avg. heterozygosity":0.0015455,"bodysize":0.03,"Repeats":null,"NUMTs":null,"Genome Length":366180695,"Num ROHs":5138,"Total ROH Length":65660131,"Class":"bird"},{"Species":"Sunda pangolin","avg. heterozygosity":0.00185366,"bodysize":4,"Repeats":27.390000000000001,"NUMTs":120,"Genome Length":1972179825,"Num ROHs":3928,"Total ROH Length":556929115,"Class":"mammal"}]; window.SWARM_ORIG = [{"Species":"Alpine marmot","avg. heterozygosity":0.0003,"bodysize":5,"Repeats":29.74,"NUMTs":69,"Genome Length":2257269818,"Num ROHs":1448,"Total ROH Length":144536590,"Class":"mammal"},{"Species":"Asian elephant","avg. heterozygosity":0.0007,"bodysize":3100,"Repeats":51.2,"NUMTs":108,"Genome Length":3369292286,"Num ROHs":3330,"Total ROH Length":141138534,"Class":"mammal"},{"Species":"Blue tit","avg. heterozygosity":0.0038,"bodysize":0.011,"Repeats":8.52,"NUMTs":11,"Genome Length":973796202,"Num ROHs":335,"Total ROH Length":3096013,"Class":"bird"},{"Species":"Blue whale","avg. heterozygosity":0.0021,"bodysize":160000,"Repeats":36.72,"NUMTs":208,"Genome Length":2368426609,"Num ROHs":9414,"Total ROH Length":239584750,"Class":"mammal"},{"Species":"Bottlenose dolphin","avg. heterozygosity":0.001,"bodysize":280,"Repeats":null,"NUMTs":null,"Genome Length":2342900125,"Num ROHs":null,"Total ROH Length":null,"Class":"mammal"},{"Species":"Chicken","avg. heterozygosity":0.0041,"bodysize":7,"Repeats":13.62,"NUMTs":10,"Genome Length":1017373226,"Num ROHs":4062,"Total ROH Length":195495680,"Class":"bird"},{"Species":"Common parakeet","avg. heterozygosity":0.0032,"bodysize":0.028,"Repeats":13.58,"NUMTs":11,"Genome Length":1085400037,"Num ROHs":64,"Total ROH Length":2015289,"Class":"bird"},{"Species":"Common wombat","avg. heterozygosity":0.0018,"bodysize":21,"Repeats":null,"NUMTs":null,"Genome Length":3066323319,"Num ROHs":3457,"Total ROH Length":1086321185,"Class":"mammal"},{"Species":"Echidna","avg. heterozygosity":0.0039,"bodysize":2,"Repeats":null,"NUMTs":null,"Genome Length":2102147521,"Num ROHs":95,"Total ROH Length":1601630,"Class":"mammal"},{"Species":"Emperor penguin","avg. heterozygosity":0.0014,"bodysize":31.5,"Repeats":6,"NUMTs":24,"Genome Length":629093285,"Num ROHs":591,"Total ROH Length":20530956,"Class":"bird"},{"Species":"European rabbit","avg. heterozygosity":0.0014,"bodysize":1.6,"Repeats":43.04,"NUMTs":76,"Genome Length":2751015428,"Num ROHs":3806,"Total ROH Length":198181167,"Class":"mammal"},{"Species":"Giant panda high","avg. heterozygosity":0.0014,"bodysize":100,"Repeats":30.67,"NUMTs":50,"Genome Length":2294400319,"Num ROHs":10,"Total ROH Length":1673041,"Class":"mammal"},{"Species":"Giant panda low","avg. heterozygosity":0.0008,"bodysize":100,"Repeats":30.67,"NUMTs":50,"Genome Length":2294400319,"Num ROHs":4846,"Total ROH Length":369839430,"Class":"mammal"},{"Species":"Golden eagle","avg. heterozygosity":0.0015,"bodysize":5,"Repeats":8.9,"NUMTs":12,"Genome Length":1215614160,"Num ROHs":1962,"Total ROH Length":647833177,"Class":"bird"},{"Species":"Great tit","avg. heterozygosity":0.0053,"bodysize":0.018,"Repeats":7.02,"NUMTs":6,"Genome Length":987035201,"Num ROHs":1946,"Total ROH Length":47617542,"Class":"bird"},{"Species":"Lion","avg. heterozygosity":0.0001,"bodysize":150,"Repeats":32.89,"NUMTs":62,"Genome Length":2288568809,"Num ROHs":829,"Total ROH Length":1857191967,"Class":"mammal"},{"Species":"Platypus","avg. heterozygosity":0.0002,"bodysize":2,"Repeats":51.6,"NUMTs":47,"Genome Length":1813343107,"Num ROHs":857,"Total ROH Length":1496387362,"Class":"mammal"},{"Species":"Snowy owl","avg. heterozygosity":0.0005,"bodysize":2,"Repeats":10.34,"NUMTs":25,"Genome Length":999613802,"Num ROHs":350,"Total ROH Length":502605680,"Class":"bird"},{"Species":"Southern ostritch","avg. heterozygosity":0.0018,"bodysize":110,"Repeats":5.19,"NUMTs":10,"Genome Length":445311711,"Num ROHs":9,"Total ROH Length":1615040,"Class":"bird"},{"Species":"Spoon-billed sandpiper","avg. heterozygosity":0.0015,"bodysize":0.03,"Repeats":null,"NUMTs":null,"Genome Length":366180695,"Num ROHs":5138,"Total ROH Length":65660131,"Class":"bird"},{"Species":"Sunda pangolin","avg. heterozygosity":0.0019,"bodysize":4,"Repeats":27.39,"NUMTs":120,"Genome Length":1972179825,"Num ROHs":3928,"Total ROH Length":556929115,"Class":"mammal"}]; window.SPECIES_COL = 'Species'; window.CLASS_COL = 'Class'; window.DEFAULT_COLOR = 'Class';</script>
+<script>
+  (function(){
+    function isFiniteNumber(x){ return typeof x==='number' && isFinite(x); }
+    function parseNumeric(v){ if (v===null || v==='') return null; var n = +v; return isFiniteNumber(n)? n : null; }
+    function subsetByClass(rows, classKey, selected){
+      if (!classKey || !selected || selected==='__ALL__') return rows;
+      if (selected==='__NA__') {
+        return rows.filter(function(r){ var v = r[classKey]; return v===null || v===undefined || v===''; });
+      } else {
+        return rows.filter(function(r){ return String(r[classKey])===String(selected); });
+      }
+    }
+    function buildTraces(rows, orig, idxs, xkey, ykey, ckey){
+      var numericColor = true;
+      for(let i=0;i<rows.length;i++){ var v = rows[i][ckey]; if (v===null || v==='' || typeof v==='number') continue; numericColor=false; break; }
+      if (numericColor){
+        var x=[], y=[], color=[], text=[], hover=[];
+        for (var k=0;k<idxs.length;k++){
+          var i = idxs[k], r = rows[i], ro = orig[i];
+          x.push(r[xkey]); y.push(r[ykey]); color.push(r[ckey]);
+          var sp = ro[window.SPECIES_COL] || '';
+          text.push(sp);
+          hover.push(sp+'<br>'+xkey+': '+ro[xkey]+'<br>'+ykey+': '+ro[ykey]+(ckey?'<br>'+ckey+': '+ro[ckey]:''));
+        }
+        return [{
+          x:x, y:y, mode:'markers', type:'scattergl',
+          text:text, hovertext:hover, hoverinfo:'text',
+          marker:{ size:10, color:color, colorscale:'Viridis', showscale:true },
+          name:'data'
+        }];
+      } else {
+        var groups = {};
+        for (var k=0;k<idxs.length;k++){
+          var i = idxs[k], r = rows[i], ro = orig[i];
+          var raw = ro[ckey];
+          var cat = (raw===null || raw===undefined || raw==='') ? '(Missing)' : String(raw);
+          if (!groups[cat]) groups[cat] = {x:[], y:[], text:[], hover:[]};
+          groups[cat].x.push(r[xkey]); groups[cat].y.push(r[ykey]);
+          var sp = ro[window.SPECIES_COL] || '';
+          groups[cat].text.push(sp);
+          groups[cat].hover.push(sp+'<br>'+xkey+': '+rawSafe(ro[xkey])+'<br>'+ykey+': '+rawSafe(ro[ykey])+'<br>'+ckey+': '+cat);
+        }
+        var traces=[];
+        Object.keys(groups).forEach(function(cat){
+          traces.push({
+            x:groups[cat].x, y:groups[cat].y,
+            mode:'markers', type:'scattergl',
+            text:groups[cat].text, hovertext:groups[cat].hover, hoverinfo:'text',
+            name: cat, marker:{size:10}
+          });
+        });
+        return traces;
+      }
+      function rawSafe(v){ return (v===null||v===undefined)?'NA':v; }
+    }
+    function addHighlight(traces, rows, orig, idxs, xkey, ykey, highlightSpecies){
+      if (!highlightSpecies || highlightSpecies==='__NONE__') return traces;
+      var x=[], y=[], text=[];
+      for (var k=0;k<idxs.length;k++){
+        var i = idxs[k], r = rows[i], ro = orig[i];
+        if (String(ro[window.SPECIES_COL])===String(highlightSpecies)){
+          x.push(r[xkey]); y.push(r[ykey]); text.push(highlightSpecies);
+        }
+      }
+      if (x.length){
+        traces.push({
+          x:x, y:y, mode:'markers', type:'scattergl', name:'highlight',
+          marker:{ size:14, symbol:'circle-open', line:{width:2} },
+          text:text, hoverinfo:'skip', showlegend:true
+        });
+      }
+      return traces;
+    }
+    function addRegressionIfRequested(layout, traces, rows, idxs, xkey, ykey, showFit){
+      if (!showFit) return {layout:layout, traces:traces, stats:null};
+      var X=[], Y=[];
+      for (var k=0;k<idxs.length;k++){
+        var i=idxs[k]; var r=rows[i];
+        if (r[xkey]==null || r[ykey]==null || !isFiniteNumber(r[xkey]) || !isFiniteNumber(r[ykey])) continue;
+        X.push(r[xkey]); Y.push(r[ykey]);
+      }
+      if (X.length<3) return {layout:layout, traces:traces, stats:{n:X.length, r:NaN, p:NaN}};
+      var rVal = ss.sampleCorrelation(X, Y);
+      var lr   = ss.linearRegression(X.map(function(xi, j){ return [xi, Y[j]]; }));
+      var line = ss.linearRegressionLine(lr);
+      var xmin = Math.min.apply(null, X), xmax = Math.max.apply(null, X);
+      var xfit = [xmin, xmax]; var yfit = xfit.map(line);
+      traces.push({ x:xfit, y:yfit, mode:'lines', line:{width:2, dash:'solid'}, name:'fit', hoverinfo:'skip' });
+      var n = X.length, df = n - 2;
+      var t = rVal * Math.sqrt(df / Math.max(1e-12, (1 - rVal*rVal)));
+      var p = 2 * (1 - jStat.studentt.cdf(Math.abs(t), df));
+      return {layout:layout, traces:traces, stats:{n:n, r:rVal, p:p}};
+    }
+    function draw(){
+      var df = window.SWARM_DF || [], orig = window.SWARM_ORIG || [];
+      var xkey = document.getElementById('xvar').value;
+      var ykey = document.getElementById('yvar').value;
+      var ckey = document.getElementById('cvar').value;
+      var classKey = window.CLASS_COL || null;
+      var classSel = document.getElementById('classFilter').value;
+      var hiSpecies = document.getElementById('speciesHi').value;
+      var doLogX = document.getElementById('logx').checked;
+      var doLogY = document.getElementById('logy').checked;
+      var showFit = document.getElementById('showfit').checked;
+
+      var rows = subsetByClass(df, classKey, classSel);
+
+      var rowsTrans = []; var idxs=[];
+      for (var i=0;i<rows.length;i++){
+        var r = Object.assign({}, rows[i]);
+        var xv = r[xkey], yv = r[ykey];
+        if (xv==null || yv==null) continue;
+        if (doLogX && xv<=0) continue;
+        if (doLogY && yv<=0) continue;
+        r[xkey] = doLogX ? Math.log10(xv) : xv;
+        r[ykey] = doLogY ? Math.log10(yv) : yv;
+        rowsTrans.push(r); idxs.push(i);
+      }
+
+      var traces = buildTraces(rowsTrans, rows, idxs, xkey, ykey, ckey);
+      traces = addHighlight(traces, rowsTrans, rows, idxs, xkey, ykey, hiSpecies);
+
+      var layout = {
+        xaxis:{ title: (doLogX?'log10 ':'') + xkey },
+        yaxis:{ title: (doLogY?'log10 ':'') + ykey },
+        margin:{l:60,r:20,t:10,b:60}, hovermode:'closest'
+      };
+
+      var withFit = addRegressionIfRequested(layout, traces, rowsTrans, idxs, xkey, ykey, showFit);
+      Plotly.react('explore-plot', withFit.traces, withFit.layout, {responsive:true, displaylogo:false});
+
+      var sp = document.getElementById('stats-panel');
+      if (withFit.stats && isFiniteNumber(withFit.stats.r)){
+        var r = withFit.stats.r, p = withFit.stats.p, n = withFit.stats.n;
+        var pTxt = (p<1e-12) ? '< 1e-12' : p.toExponential(2);
+        sp.innerHTML = 'n = '+n+' &middot; r = '+r.toFixed(3)+' &middot; p = '+pTxt + ((doLogX||doLogY) ? ' (on transformed scale)' : '');
+      } else if (showFit) {
+        sp.innerHTML = 'Not enough points for regression.';
+      } else {
+        sp.innerHTML = '';
+      }
+    }
+    document.getElementById('cvar').value = window.DEFAULT_COLOR || document.getElementById('cvar').value;
+    var ysel = document.getElementById('yvar'); if (ysel && ysel.options.length>1) ysel.selectedIndex = 1;
+    ['xvar','yvar','cvar','classFilter','speciesHi','logx','logy','showfit'].forEach(function(id){ var el=document.getElementById(id); if(el) el.addEventListener('change', draw); });
+    function ready(){ if (window.Plotly && window.ss && window.jStat) draw(); else setTimeout(ready, 100); }
+    ready();
+  })();
+  </script>
 </div>
 </div>
 
