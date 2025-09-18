@@ -159,11 +159,12 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<!-- Client-side libs -->
 <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/simple-statistics/7.8.3/simple-statistics.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jstat/1.9.6/jstat.min.js"></script>
 <p>Interactively explore variables from <strong>data/all_info.txt</strong> (tab‑delimited).<br>
-Choose X/Y axes, color (e.g., <strong>Class</strong>), filter by <strong>Class</strong> (including a <strong>(Missing)</strong> option), and optionally highlight a <strong>Species</strong> without filtering. Use log scales and add a regression line (with <em>r</em> and <em>p</em>).</p>
+Choose X/Y axes, color (e.g., <strong>Class</strong>), subset by <strong>Class</strong>, optionally highlight a <strong>Species</strong> (without filtering), toggle <strong>log scales</strong>, and add a <strong>regression line</strong> with <em>r</em> and <em>p</em>.</p>
 <div class="cell">
 <div class="cell-output-display no-overflow-x">
 <p>
@@ -259,7 +260,6 @@ Choose X/Y axes, color (e.g., <strong>Class</strong>), filter by <strong>Class</
 <script>
   (function(){
     function isFiniteNumber(x){ return typeof x==='number' && isFinite(x); }
-    function parseNumeric(v){ if (v===null || v==='') return null; var n = +v; return isFiniteNumber(n)? n : null; }
     function subsetByClass(rows, classKey, selected){
       if (!classKey || !selected || selected==='__ALL__') return rows;
       if (selected==='__NA__') {
@@ -268,17 +268,46 @@ Choose X/Y axes, color (e.g., <strong>Class</strong>), filter by <strong>Class</
         return rows.filter(function(r){ return String(r[classKey])===String(selected); });
       }
     }
-    function buildTraces(rows, orig, idxs, xkey, ykey, ckey){
+    function splitByCategory(rowsTrans, rowsOrig, xkey, ykey, ckey){
+      var groups = {};
+      for (var k=0;k<rowsTrans.length;k++){
+        var r = rowsTrans[k], ro = rowsOrig[k];
+        var raw = ro[ckey];
+        var cat = (raw===null || raw===undefined || raw==='') ? '(Missing)' : String(raw);
+        if (!groups[cat]) groups[cat] = {x:[], y:[], text:[], hover:[]};
+        groups[cat].x.push(r[xkey]); groups[cat].y.push(r[ykey]);
+        var sp = ro[window.SPECIES_COL] || '';
+        groups[cat].text.push(sp);
+        groups[cat].hover.push(sp+'<br>'+xkey+': '+(ro[xkey]??'NA')+'<br>'+ykey+': '+(ro[ykey]??'NA')+'<br>'+ckey+': '+cat);
+      }
+      var traces=[];
+      Object.keys(groups).forEach(function(cat){
+        traces.push({
+          x:groups[cat].x, y:groups[cat].y,
+          mode:'markers', type:'scattergl',
+          text:groups[cat].text, hovertext:groups[cat].hover, hoverinfo:'text',
+          name: cat, marker:{size:10}
+        });
+      });
+      return traces;
+    }
+    function buildTraces(rowsTrans, rowsOrig, xkey, ykey, ckey){
+      // Determine if color field is numeric (ignore nulls)
       var numericColor = true;
-      for(let i=0;i<rows.length;i++){ var v = rows[i][ckey]; if (v===null || v==='' || typeof v==='number') continue; numericColor=false; break; }
+      for (var i=0;i<rowsTrans.length;i++){
+        var v = rowsTrans[i][ckey];
+        if (v===null || v===undefined || v==='') continue;
+        if (typeof v !== 'number' || !isFinite(v)){ numericColor=false; break; }
+      }
       if (numericColor){
         var x=[], y=[], color=[], text=[], hover=[];
-        for (var k=0;k<idxs.length;k++){
-          var i = idxs[k], r = rows[i], ro = orig[i];
-          x.push(r[xkey]); y.push(r[ykey]); color.push(r[ckey]);
+        for (var k=0;k<rowsTrans.length;k++){
+          var r = rowsTrans[k], ro = rowsOrig[k];
+          x.push(r[xkey]); y.push(r[ykey]);
+          color.push((typeof r[ckey]==='number' && isFinite(r[ckey])) ? r[ckey] : null);
           var sp = ro[window.SPECIES_COL] || '';
           text.push(sp);
-          hover.push(sp+'<br>'+xkey+': '+ro[xkey]+'<br>'+ykey+': '+ro[ykey]+(ckey?'<br>'+ckey+': '+ro[ckey]:''));
+          hover.push(sp+'<br>'+xkey+': '+(ro[xkey]??'NA')+'<br>'+ykey+': '+(ro[ykey]??'NA')+(ckey?'<br>'+ckey+': '+(ro[ckey]??'NA'):''));
         }
         return [{
           x:x, y:y, mode:'markers', type:'scattergl',
@@ -287,37 +316,16 @@ Choose X/Y axes, color (e.g., <strong>Class</strong>), filter by <strong>Class</
           name:'data'
         }];
       } else {
-        var groups = {};
-        for (var k=0;k<idxs.length;k++){
-          var i = idxs[k], r = rows[i], ro = orig[i];
-          var raw = ro[ckey];
-          var cat = (raw===null || raw===undefined || raw==='') ? '(Missing)' : String(raw);
-          if (!groups[cat]) groups[cat] = {x:[], y:[], text:[], hover:[]};
-          groups[cat].x.push(r[xkey]); groups[cat].y.push(r[ykey]);
-          var sp = ro[window.SPECIES_COL] || '';
-          groups[cat].text.push(sp);
-          groups[cat].hover.push(sp+'<br>'+xkey+': '+rawSafe(ro[xkey])+'<br>'+ykey+': '+rawSafe(ro[ykey])+'<br>'+ckey+': '+cat);
-        }
-        var traces=[];
-        Object.keys(groups).forEach(function(cat){
-          traces.push({
-            x:groups[cat].x, y:groups[cat].y,
-            mode:'markers', type:'scattergl',
-            text:groups[cat].text, hovertext:groups[cat].hover, hoverinfo:'text',
-            name: cat, marker:{size:10}
-          });
-        });
-        return traces;
+        return splitByCategory(rowsTrans, rowsOrig, xkey, ykey, ckey);
       }
-      function rawSafe(v){ return (v===null||v===undefined)?'NA':v; }
     }
-    function addHighlight(traces, rows, orig, idxs, xkey, ykey, highlightSpecies){
+    function addHighlight(traces, rowsTrans, rowsOrig, xkey, ykey, highlightSpecies){
       if (!highlightSpecies || highlightSpecies==='__NONE__') return traces;
       var x=[], y=[], text=[];
-      for (var k=0;k<idxs.length;k++){
-        var i = idxs[k], r = rows[i], ro = orig[i];
+      for (var k=0;k<rowsTrans.length;k++){
+        var ro = rowsOrig[k];
         if (String(ro[window.SPECIES_COL])===String(highlightSpecies)){
-          x.push(r[xkey]); y.push(r[ykey]); text.push(highlightSpecies);
+          x.push(rowsTrans[k][xkey]); y.push(rowsTrans[k][ykey]); text.push(highlightSpecies);
         }
       }
       if (x.length){
@@ -329,13 +337,14 @@ Choose X/Y axes, color (e.g., <strong>Class</strong>), filter by <strong>Class</
       }
       return traces;
     }
-    function addRegressionIfRequested(layout, traces, rows, idxs, xkey, ykey, showFit){
+    function addRegressionIfRequested(layout, traces, rowsTrans, xkey, ykey, showFit){
       if (!showFit) return {layout:layout, traces:traces, stats:null};
       var X=[], Y=[];
-      for (var k=0;k<idxs.length;k++){
-        var i=idxs[k]; var r=rows[i];
-        if (r[xkey]==null || r[ykey]==null || !isFiniteNumber(r[xkey]) || !isFiniteNumber(r[ykey])) continue;
-        X.push(r[xkey]); Y.push(r[ykey]);
+      for (var i=0;i<rowsTrans.length;i++){
+        var rx = rowsTrans[i][xkey], ry = rowsTrans[i][ykey];
+        if (typeof rx==='number' && isFinite(rx) && typeof ry==='number' && isFinite(ry)){
+          X.push(rx); Y.push(ry);
+        }
       }
       if (X.length<3) return {layout:layout, traces:traces, stats:{n:X.length, r:NaN, p:NaN}};
       var rVal = ss.sampleCorrelation(X, Y);
@@ -350,7 +359,7 @@ Choose X/Y axes, color (e.g., <strong>Class</strong>), filter by <strong>Class</
       return {layout:layout, traces:traces, stats:{n:n, r:rVal, p:p}};
     }
     function draw(){
-      var df = window.SWARM_DF || [], orig = window.SWARM_ORIG || [];
+      var df = window.SWARM_DF || [], origAll = window.SWARM_ORIG || [];
       var xkey = document.getElementById('xvar').value;
       var ykey = document.getElementById('yvar').value;
       var ckey = document.getElementById('cvar').value;
@@ -361,22 +370,27 @@ Choose X/Y axes, color (e.g., <strong>Class</strong>), filter by <strong>Class</
       var doLogY = document.getElementById('logy').checked;
       var showFit = document.getElementById('showfit').checked;
 
+      // Subset by Class
       var rows = subsetByClass(df, classKey, classSel);
+      var rowsOrig = subsetByClass(origAll, classKey, classSel);
 
-      var rowsTrans = []; var idxs=[];
+      // Transform x/y, drop nulls and non-finite
+      var rowsTrans = [], origAligned = [];
       for (var i=0;i<rows.length;i++){
         var r = Object.assign({}, rows[i]);
+        var ro = rowsOrig[i];
         var xv = r[xkey], yv = r[ykey];
         if (xv==null || yv==null) continue;
-        if (doLogX && xv<=0) continue;
-        if (doLogY && yv<=0) continue;
+        if (doLogX && (!(typeof xv==='number' && isFinite(xv)) || xv<=0)) continue;
+        if (doLogY && (!(typeof yv==='number' && isFinite(yv)) || yv<=0)) continue;
         r[xkey] = doLogX ? Math.log10(xv) : xv;
         r[ykey] = doLogY ? Math.log10(yv) : yv;
-        rowsTrans.push(r); idxs.push(i);
+        rowsTrans.push(r); origAligned.push(ro);
       }
 
-      var traces = buildTraces(rowsTrans, rows, idxs, xkey, ykey, ckey);
-      traces = addHighlight(traces, rowsTrans, rows, idxs, xkey, ykey, hiSpecies);
+      // Build traces and overlays
+      var traces = buildTraces(rowsTrans, origAligned, xkey, ykey, ckey);
+      traces = addHighlight(traces, rowsTrans, origAligned, xkey, ykey, hiSpecies);
 
       var layout = {
         xaxis:{ title: (doLogX?'log10 ':'') + xkey },
@@ -384,11 +398,11 @@ Choose X/Y axes, color (e.g., <strong>Class</strong>), filter by <strong>Class</
         margin:{l:60,r:20,t:10,b:60}, hovermode:'closest'
       };
 
-      var withFit = addRegressionIfRequested(layout, traces, rowsTrans, idxs, xkey, ykey, showFit);
+      var withFit = addRegressionIfRequested(layout, traces, rowsTrans, xkey, ykey, showFit);
       Plotly.react('explore-plot', withFit.traces, withFit.layout, {responsive:true, displaylogo:false});
 
       var sp = document.getElementById('stats-panel');
-      if (withFit.stats && isFiniteNumber(withFit.stats.r)){
+      if (withFit.stats && typeof withFit.stats.r === 'number' && isFinite(withFit.stats.r)){
         var r = withFit.stats.r, p = withFit.stats.p, n = withFit.stats.n;
         var pTxt = (p<1e-12) ? '< 1e-12' : p.toExponential(2);
         sp.innerHTML = 'n = '+n+' &middot; r = '+r.toFixed(3)+' &middot; p = '+pTxt + ((doLogX||doLogY) ? ' (on transformed scale)' : '');
@@ -398,6 +412,7 @@ Choose X/Y axes, color (e.g., <strong>Class</strong>), filter by <strong>Class</
         sp.innerHTML = '';
       }
     }
+    // Defaults
     document.getElementById('cvar').value = window.DEFAULT_COLOR || document.getElementById('cvar').value;
     var ysel = document.getElementById('yvar'); if (ysel && ysel.options.length>1) ysel.selectedIndex = 1;
     ['xvar','yvar','cvar','classFilter','speciesHi','logx','logy','showfit'].forEach(function(id){ var el=document.getElementById(id); if(el) el.addEventListener('change', draw); });
